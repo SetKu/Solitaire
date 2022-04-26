@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solitaire</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="shortcut icon" type="image" href="./favicon.ico">
+  <script src="../dist/main.js" type="module"></script>
+</head>
+
+<body>
+  <!-- The header displays the main title for the game. -->
+  <div class="header">
+    <div class="header__title">Solitaire</div>
+    <img src="./media/spades-playing-card-icon.svg" class="header__icon">
+  </div>
+  <!-- This container holds the main content of the game. It holds the alerts, the gameboard itself. The divider should look like the surface of a table. -->
+  <main class="deck-surface">
+    <!-- Alerts will be added inside the alerts div. -->
+    <div class="alerts"></div>
+    <!-- The game controls for the game are shown above the game board.-->
+    <div class="game__controls">
+      <!-- Each button consists of a button object and an interior span holding its text. -->
+      <button class="button-01 game__controls__new-game">
+        <span>New Game</span>
+      </button>
+      <button class="button-01 game__controls__undo">
+        <span>Undo</span>
+      </button>
+      <button class="button-01 game__controls__winnability">
+        <span>Check Game Winnability</span>
+      </button>
+    </div>
+    <!-- The game class presents the entire game board and contains the game's cards. -->
+    <div class="game">
+      <!-- The game stock cloth holds the stock deck representation and the stock revealed cards. -->
+      <div class="game__stock-cloth">
+        <div>
+          <div class="deck"></div>
+        </div>
+        <div class="game__stock-cloth__revealed-cards drop-target" draggable="false"></div>
+      </div>
+      <!-- The game working cloth holds all the working piles in an interior div container. -->
+      <div class="game__working-cloth">
+        <div class="game__working-cloth__piles">
+          <div class="pile drop-target" data-index="0"></div>
+          <div class="pile drop-target" data-index="1"></div>
+          <div class="pile drop-target" data-index="2"></div>
+          <div class="pile drop-target" data-index="3"></div>
+          <div class="pile drop-target" data-index="4"></div>
+          <div class="pile drop-target" data-index="5"></div>
+          <div class="pile drop-target" data-index="6"></div>
+        </div>
+      </div>
+      <!-- The foundation deck cloth holds the foundation decks, each of which have a container that holds the card current being used to represent the deck. -->
+      <div class="game__foundation-cloth">
+        <div class="game__foundation-cloth__spades">
+          <div class="card--suit-placeholder drop-target"><img src="./media/spades.svg"></div>
+        </div>
+        <div class="game__foundation-cloth__clubs">
+          <div class="card--suit-placeholder drop-target"><img src="./media/clubs.svg"></div>
+        </div>
+        <div class="game__foundation-cloth__hearts">
+          <div class="card--suit-placeholder drop-target"><img src="./media/hearts.svg"></div>
+        </div>
+        <div class="game__foundation-cloth__diamonds">
+          <div class="card--suit-placeholder drop-target"><img src="./media/diamonds.svg"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- The project's footer details all the content being used from third parties: playing cards icons, sound effects, etc. Links are provided to the original sources and licensing. -->
+  <footer class="footer">
+    <small>
+      Playing card suit icons adapted from <a
+        href="https://commons.wikimedia.org/wiki/File:Anglo-American_card_suits.svg" target="_blank">Silsor's
+        Anglo-American card suits on Wikimedia</a> under the <a href="https://creativecommons.org/licenses/by-sa/3.0/"
+        target="_blank">CC Attribution Share Alike 3.0 Unported license</a>.
+      Click sound effect used is from user <a href="https://freesound.org/people/nirmatara/sounds/48610/"
+        target="_blank">nirmatara on freesound.org</a>
+      under the <a href="https://creativecommons.org/licenses/by-nc/3.0/" target="_blank">CC Attribution-NonCommercial
+        3.0 Unported (CC BY-NC 3.0) license.
+        license</a>.
+      Spades playing card is from <a href="https://www.svgrepo.com/svg/286712/spades-playing-cards">svgrepo.com</a>
+      under a <a href="https://creativecommons.org/licenses/publicdomain/">CC Public Domain license.</a>
+    </small>
+  </footer>
+</body>
+
+</html>

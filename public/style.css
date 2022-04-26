@@ -1,0 +1,372 @@
+/* http://getbem.com/naming/ */
+
+/* Global variables are declared on root for use throughout the CSS. Including a shared card size value, the game's maximum allowed height, and its border radius. */
+:root {
+  --card-size-common: 1.8;
+  --game-max-height: 28.4rem;
+  --border-radius: 12px;
+}
+
+/* The global font-family is set to Arial. */
+* {
+  font-family: Arial;
+}
+
+/* The content of the page is set to be able to reach the viewport's border and be arranged in a grid. */
+body {
+  margin: 0;
+  display: grid;
+}
+
+/* The header is styled to be gray, a nice banner height, have an appropriate title font size, have its elements centered and arranged in a grid, and have a shadow. */
+.header {
+  z-index: 0;
+  height: 3.4rem;
+  background-color: #585858;
+  box-shadow: 0 2pt 7pt rgba(0, 0, 0, 0.5);
+  display: grid;
+  grid-template-columns: 6rem 5rem auto;
+  place-items: center;
+  font-size: 1.5rem;
+  color: whitesmoke;
+}
+
+/* The header title is set to be moved slightly right from its starting position to be closer to the icon. */
+.header__title {
+  transform: translateX(1rem);
+}
+
+/* The icon's size is constrained so it doesn't grow too large or appear too small. */
+.header__icon {
+  height: 2.3rem;
+}
+
+/* The deck surface is set to be a brown linear gradient and be twice the height of the viewport (so its scrollable). */
+.deck-surface {
+  background: linear-gradient(to bottom right, #6a4d3f, #725242);
+  height: 150vh;
+}
+
+/* The game is set to be arranged in a grid with three columns of preset width, and have a margin to it doesn't touch the sides of its container element. */
+.game {
+  display: grid;
+  grid-template-columns: 6rem 4fr 6rem;
+  margin: 22pt;
+}
+
+/* The game and game controls are given the same border radius which is defined by the corresponding global root variable. */
+.game,
+.game__controls {
+  border-radius: var(--border-radius);
+}
+
+/* The game, game controls, and alert containers are all given the same shadow. */
+.game,
+.game__controls,
+.alert {
+  box-shadow: 3pt 3pt 10pt rgba(0, 0, 0, 0.5);
+}
+
+/* The fadeOut animation is defined to fade an object to zero opacity. */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Alerts are set so their content is spaced out to its edges, have a white text colour, an appropriate font size, padding to pleasantly pad to the alert, and a margin so it doesn't touch the viewport or other elements. Additionally, the alert is centered and given a game cloth like background colour. The animation settings are also set on it so that if its given the fade out property it will animate properly. */
+.alert {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin: 2rem;
+  padding: 1.3rem;
+  color: white;
+  font-size: 1.8rem;
+  background-color: #256318;
+  border-radius: 12px;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+/* The first child of the div is given a border radius on its top left and bottom left corners. */
+.game > div:first-child {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+/* The last child of the div is given a border radius on its top right and bottom right corners. */
+.game > div:last-child {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+/* The dismiss button of alerts is given an appropriate height, a white colour, a grey border, and border radius. */
+.alert > button {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: whitesmoke;
+  border: 3px solid #a2a2a2;
+  border-radius: 12px;
+}
+
+/* When the alert dismiss button is pushed, it's brightness will be lowered to reflect the physical imagery of depressing a button. */
+.alert > button:active {
+  filter: brightness(0.5);
+}
+
+/* All the game cloths are displayed as grids. */
+.game__stock-cloth,
+.game__working-cloth,
+.game__foundation-cloth {
+  display: grid;
+}
+
+/* This styling restricts the max height of the game for all the game cloths. */
+.game__stock-cloth,
+.game__working-cloth,
+.game__foundation-cloth {
+  max-height: var(--game-max-height);
+}
+
+/* This styling sets the background colour for the stock cloth and foundation cloth to a dark green. */
+.game__stock-cloth,
+.game__foundation-cloth {
+  background-color: #205314;
+}
+
+/* The game stock cloth and foundation cloth are given padding and its items (cards) are set to be place to be center. */
+.game__stock-cloth,
+.game__foundation-cloth {
+  padding: 0.4em 0;
+  place-items: center;
+}
+
+/* The game stock cloth is set to have four rows. */
+.game__stock-cloth {
+  grid-template-rows: repeat(4, 1fr);
+}
+
+/* The stock cloth revealed cards are set to be displayed as though they're not in a separate container, and thus will show up in a grid aligned with the stock deck. */
+.game__stock-cloth__revealed-cards {
+  display: contents;
+}
+
+/* The working cloth's background colour is set to be a shade of green lighter than the stock and foundation cloths. */
+.game__working-cloth {
+  background-color: #297817;
+}
+
+/* The working cloth piles are set to display in a grid holding several piles and have an inset margin. */
+.game__working-cloth__piles {
+  margin-top: 0.45rem;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+/* Text inside red cards are set to be displayed in the colour red. */
+.card.red {
+  color: red;
+}
+
+/* Cards are set to have a background colour of white. */
+.card {
+  background-color: #ffffff;
+}
+
+/* All card variants are set to have a margin, the same border radius, the same shadow, and the same width and height. */
+.card,
+.card--face-down,
+.card--suit-placeholder,
+.deck {
+  margin: 0.3rem;
+  border-radius: 0.3125rem;
+  width: calc(2.5rem * var(--card-size-common));
+  height: calc(3.5rem * var(--card-size-common));
+  box-shadow: 0.1rem 0.1rem 0 rgba(0, 0, 0, 0.2);
+}
+
+/* The face down cards, suit placeholder cards, and decks are all set to have the same background colour and border. The border is also applied inset in the card so that the card does not add the width of the border to the card. */
+.card--face-down,
+.card--suit-placeholder,
+.deck {
+  box-sizing: border-box;
+  background-color: #27539b;
+  border: 0.27rem solid rgba(255, 255, 255, 0.1);
+}
+
+/* The deck is set to have a darker border and animate its filter property. */
+.deck {
+  border: 0.32rem solid rgba(255, 255, 255, 0.1);
+  transition: filter 0.15s;
+}
+
+/* When a deck is clicked, its brightness is animated to a lower brightness to simulate its depression. */
+.deck:active {
+  filter: brightness(0.6);
+}
+
+/* All card interior elements, such as its suit icon and value, are set to not be selectable by the user. */
+.card * {
+  user-select: none;
+}
+
+/* The cards top left and bottom right interior dividers are set to have the same width, be position relative, and in the center of the card (as well as have the same font size for the card values). */
+.card__top-left,
+.card__bottom-right {
+  text-align: center;
+  position: relative;
+  width: 40%;
+  line-height: 100%;
+  font-size: 1.3rem;
+}
+
+/* The cards top left container is physically moved to the top left of the card. */
+.card__top-left {
+  top: 0.5rem;
+  left: 0.065rem;
+}
+
+/* The cards bottom right container is physically moved to the bottom right of the card and flipped upside down. */
+.card__bottom-right {
+  transform: rotate(180deg);
+  bottom: -0.5rem;
+  right: -2.65rem;
+}
+
+/* The corner suit vector image is appropriately sized to fit within the card. */
+.card__corner-suit {
+  height: 0.88125em;
+  width: 0.6em;
+}
+
+/* All cards within a pile are set with a left and right margin to center it horizontally. */
+.pile .card,
+.pile .card--face-down {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* The placeholder image in a suit placeholder card is set to be black, have a drop shadow, and have a lower opacity. The image is also positioned to be in the center of the card and has its width set to be the appropriate size. */
+.card--suit-placeholder img {
+  filter: brightness(0) drop-shadow(0 0 0.04rem rgba(0, 0, 0, 0.5)) opacity(0.8);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2rem;
+}
+
+/* This style sets piles to specifically has a maximum height set to the root variable slightly lowered so it fits within the game board. */
+.pile {
+  max-height: calc(var(--game-max-height) - 1rem);
+}
+
+/* The game controls container div is set to display its items in a flex container, have a margin, be horizontally centred, have a background colour similar to a stock cloth, and have an appropriate width to fit its two buttons. Additionally, padding is applied and the buttons are given equal spacing in the flexbox. */
+.game__controls {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 1.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  width: 30rem;
+  background-color: #297817;
+  padding: 12px 0;
+}
+
+/* This style applies to buttons and sets it such that the button cannot be expected, be displayed as a flexbox, have its elements spaced evenly, have a white background, and have a box shadow. Additionally, the background is set to animate the change of its background colour. */
+.button-01 {
+  user-select: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 8rem;
+  height: 3rem;
+  background: #fcfcfd;
+  box-shadow: 0 0.3rem 0 0 rgb(70, 70, 70), 0 0.4rem 9px 0 rgba(70, 70, 70, 0.5);
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  transition: background 0.15s;
+}
+
+/* If the button is disabled, on hover nothing should happen and the background colour should remain the same. */
+.button-01.disabled:hover {
+  transition-property: none !important;
+  background: #fcfcfd;
+}
+
+/* If the button is disabled, it will be set not to change its filter or move in any way when clicked. */
+.button-01.disabled:active {
+  filter: none !important;
+  transform: none !important;
+}
+
+/* When a button is normally hovered over, the background will darken. */
+.button-01:hover {
+  background: #e4e4e4;
+}
+
+/* When a button is normally clicked, it's darkened and slightly moved downwards to simulate a clicking motion. */
+.button-01:active {
+  filter: brightness(0.8);
+  transform: translateY(1px);
+}
+
+/* The footer is styled to have a fixed position at the bottom of the screen, fill the viewport, and have its text set to be white. */
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 90vw;
+  padding: 1rem 5vw;
+  background-color: #585858;
+  color: whitesmoke;
+}
+
+/* Footer links are styled to be white like normal text. */
+.footer a {
+  color: whitesmoke;
+}
+
+/* If a link has been visited, its colour is slightly darkened to reflect that fact. */
+.footer a:visited {
+  color: #c1c1c1;
+}
+
+/* When a link is hovered over in the footer its colour is changed to an orange to indicate the user is hovering over it. */
+.footer a:hover {
+  color: rgb(231, 167, 46);
+}
+
+/* If the screen is smaller than 830px, the game board is not large enough for the game to be playable. In this case, all game cards and card objects are styled to disappear. Additionally, text is shown on the game board indicating to the user that their viewport is too small to play. This text is centered and set to the colour white. */
+@media only screen and (max-width: 830px) {
+  .game__working-cloth__piles::after {
+    position: absolute;
+    content: "Game window is too small.";
+    left: 50%;
+    transform: translateX(-50%);
+    color: whitesmoke;
+  }
+
+  .card,
+  .card--face-down,
+  .card--suit-placeholder,
+  .deck,
+  .game__controls {
+    display: none;
+  }
+
+  .game {
+    height: 10rem;
+  }
+}
+
+/* If the viewport is large enough, working pile game cards are enlarged to be more visible. */
+@media only screen and (min-width: 1300px) {
+  .pile {
+    transform: scale(1.15) translateY(2.25rem);
+  }
+}

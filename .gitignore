@@ -1,0 +1,6 @@
+*.DS_Store
+.vscode
+*.code-workspace
+node_modules/
+dist/
+src/index.js
