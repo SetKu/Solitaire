@@ -13,7 +13,6 @@ var gameStockClothRevealedCards = document.querySelector('.game__stock-cloth__re
 var gameWorkingClothPiles = document.querySelector('.game__working-cloth__piles');
 var gameControlsNewGame = document.querySelector('.game__controls__new-game');
 var gameControlsUndo = document.querySelector('.game__controls__undo');
-var gameControlsCheckGameWinnability = document.querySelector('.game__controls__winnability');
 var gameFoundationCloth = document.querySelector('.game__foundation-cloth');
 var gameFoundationClothSpades = document.querySelector('.game__foundation-cloth__spades');
 var gameFoundationClothClubs = document.querySelector('.game__foundation-cloth__clubs');
@@ -1236,50 +1235,3 @@ function getValidMoves(forState?: State): Array<Move> {
 
   return validMoves;
 }
-
-function checkGameWinnability(): boolean {
-  let validMoves = getValidMoves();
-  const stateCopy = (new StateLog(state)).state;
-
-  const recursiveCheck = (move: Move, stateCopy: State) => {
-    let state = (new StateLog(stateCopy)).state;
-    moveItem(move.item, move.destination, state);
-
-    if (checkGameStatus(state)) {
-      return true;
-    }
-
-    for (const move of getValidMoves(state)) {
-      return recursiveCheck(move, state);
-    }
-
-    return false;
-  }
-
-  for (const move of validMoves) {
-    if (recursiveCheck(move, stateCopy)) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-gameControlsCheckGameWinnability.addEventListener("click", () => {
-  let winnable = checkGameWinnability();
-  let span = gameControlsCheckGameWinnability.children.item[0];
-  const oldInnerHTML = span.innerHTML;
-  const newId = uuid.v4();
-
-  if (winnable) {
-    span.innerHTML = "Yes";
-  } else {
-    span.innerHTML = "No";
-  }
-
-  span.id = newId;
-
-  fadeOut(newId, () => {
-    span.innerHTML = oldInnerHTML;
-  });
-});
