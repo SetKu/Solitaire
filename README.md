@@ -1,3 +1,7 @@
+# Solitaire
+
+![preview-screenshot.png](preview-screenshot.png)
+
 To generate and build this project, run `npm run build` in the terminal.
 
 To start this project, run `node server.js`. You can also type `npm run start` as an alternative. This will start up the project's web server using [ExpressJS](https://expressjs.com/) and let it begin accepting and responding to web traffic with the projects web files.

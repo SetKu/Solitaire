@@ -19,7 +19,7 @@
     "webpack": "webpack",
     "start": "node server.js"
   },
-  "author": "SetKu",
+  "author": "Zachary Morden",
   "license": "MIT",
   "description": "A basic solitaire web clone built using standard technologies such as Node, Webpack, Express, and TypeScript."
 }
